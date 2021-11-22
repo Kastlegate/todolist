@@ -6,8 +6,7 @@ import './style.css';
 // creates the header
 let header = document.createElement("header");
     header.id = "header";
-let content = document.getElementById("content");
-document.body.insertBefore(header, content);
+document.body.appendChild(header);
 //container for the logo text and boxes
 let logoContainer = document.createElement("div");
     logoContainer.id = "logoContainter";
@@ -36,6 +35,27 @@ let logoBoxThree = document.createElement("div");
     logoBoxThree.id = "logoBoxThree";
     logoBoxThree.classList.add("logoBox");
     logoBoxContainer.appendChild(logoBoxThree);
+// the main content of the page. A div that holds the navigation sidebar and the current project display
+let mainContent = document.createElement("div");
+    mainContent.id = "mainContent";
+    document.body.appendChild(mainContent);
+// navigation sidebar
+let sideBar = document.createElement("div");
+    sideBar.id = "sideBar";
+    sideBar.textContent = "Projects will go here."
+    mainContent.appendChild(sideBar);
+// current project display
+let projectDisplay = document.createElement("div");
+    projectDisplay.id = "projectDisplay";
+    projectDisplay.textContent = "Current Project Name."
+    mainContent.appendChild(projectDisplay);
+// content for the current project
+let projectContent = document.createElement("div");
+    projectContent.id = "projectContent";
+    projectContent.textContent = "Content for the current project goes in here."
+    projectDisplay.appendChild(projectContent);
+
+
 
 
 
