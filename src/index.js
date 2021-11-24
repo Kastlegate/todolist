@@ -1,5 +1,6 @@
 import './style.css';
-// import { homeTabClicked } from './home';
+import { createList } from './toDoFunctions.js';
+import { compareAsc, format } from 'date-fns'
 
 
 
@@ -42,18 +43,27 @@ let mainContent = document.createElement("div");
 // navigation sidebar
 let sideBar = document.createElement("div");
     sideBar.id = "sideBar";
-    sideBar.textContent = "Projects will go here."
+    sideBar.textContent = "Projects";
     mainContent.appendChild(sideBar);
+//Used in sidebar to display a list of all projects
+let projectListContainer = document.createElement("div");
+    projectListContainer.id = "projectListContainer";
+    sideBar.appendChild(projectListContainer);
 // current project display
 let projectDisplay = document.createElement("div");
     projectDisplay.id = "projectDisplay";
-    projectDisplay.textContent = "Current Project Name."
     mainContent.appendChild(projectDisplay);
+// title for the current project
+let currentProjectTitle = document.createElement("h1");
+    currentProjectTitle.id = "currentProjectTitle";
+    currentProjectTitle.textContent = "Select a To Do List to begin";
+    projectDisplay.appendChild(currentProjectTitle);
 // content for the current project
 let projectContent = document.createElement("div");
     projectContent.id = "projectContent";
-    projectContent.textContent = "Content for the current project goes in here."
     projectDisplay.appendChild(projectContent);
+
+    createList();
 
 
 

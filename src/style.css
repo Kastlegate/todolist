@@ -92,7 +92,16 @@ body{
     border-right: solid;
     border-top: solid;
     border-color: black;
+    text-align: center;
     /* box-sizing:border-box;  */
+}
+
+.sideBarProjectList{
+    color: white;
+    font-size: 100%;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 5px;
 }
 
 #projectDisplay{
@@ -101,17 +110,34 @@ body{
     width: 80%;
     background-color: rgb(255, 255, 223);
     /* color: white; */
-    font-size: 200%; 
-    text-align: center;
+    
     /* box-sizing:border-box; */
 }
 
+#currentProjectTitle{
+    font-size: 200%; 
+    text-align: center;
+    width: 50%;
+    text-decoration: underline;
+    margin-left: 14%;
+    height: fit-content;
+}
+
 #projectContent{
+    margin-left: 14%;
     height: 300px;
     width: 50%;
     background-color: rgb(36, 80, 36);
     color: white;
-    margin: auto;
+    /* margin: auto; */
     border-radius: 25px 25px 25px 25px;
+    text-align: center;
 }
+
+/* style for each task, bullet, due date and priority container */
+.taskContainer{
+    width: 100%;
+    height: fit-content;
+}
+
 
