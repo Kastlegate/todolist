@@ -25,17 +25,20 @@ body{
     position: absolute;
     position: absolute;
     border-bottom: solid;
+    display: flex;
+    flex-direction: row;
 }
 
 #logoContainter{
     height: fit-content;
     width: fit-content;
-    margin-left: 20px;
+    margin-left: 45%;
     margin-top: 0px;
     display: flex;
     flex-direction: row;
     animation: dropDown 3s;
-    margin: auto;
+    /* margin: auto; */
+    
 }
 
 @keyframes dropDown {
@@ -73,14 +76,26 @@ body{
     box-sizing:border-box;
 }
 
+#createNewProject{
+    float: right;
+    width: fit-content;
+    margin-left: 20%;
+}
+
+#newProjectForm{
+    height: 300px;
+    width: 300px;
+    background-color: indianred;
+}
+
 #mainContent{
     margin-top: 45px;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: row;
     box-sizing:border-box;
-    position:fixed;
+    position:fixed; /* reason page won't scroll down will need to be fixed */
 }
 
 #sideBar{
@@ -109,9 +124,6 @@ body{
     height: 100%;
     width: 80%;
     background-color: rgb(255, 255, 223);
-    /* color: white; */
-    
-    /* box-sizing:border-box; */
 }
 
 #currentProjectTitle{
@@ -125,13 +137,14 @@ body{
 
 #projectContent{
     margin-left: 14%;
-    height: 300px;
+    min-height: 300px;
     width: 50%;
     background-color: rgb(36, 80, 36);
     color: white;
     /* margin: auto; */
     border-radius: 25px 25px 25px 25px;
     text-align: center;
+    max-height: fit-content;
 }
 
 /* style for each task, bullet, due date and priority container */

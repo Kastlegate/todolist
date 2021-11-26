@@ -1,5 +1,5 @@
 import './style.css';
-import { createList } from './toDoFunctions.js';
+import { newProjectForm, addProjectsToSideBar, sideBarProjectClicked } from './toDoFunctions.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -36,6 +36,27 @@ let logoBoxThree = document.createElement("div");
     logoBoxThree.id = "logoBoxThree";
     logoBoxThree.classList.add("logoBox");
     logoBoxContainer.appendChild(logoBoxThree);
+
+    //DOES THIS BELONG IN THE INDEX PAGE???
+    // function newProjectForm(){
+    //     console.log("Hi there!")
+    //     let newProjectForm = document.createElement("form");
+    //     newProjectForm.id = "newProjectForm";
+    //     mainContent.appendChild(newProjectForm);
+    // }
+// function for the create new project button
+function createNewProjectButtonPressed(){
+    newProjectForm()
+    
+}
+
+let createNewProject = document.createElement("button");
+    createNewProject.id = "createNewProject";
+    createNewProject.textContent = "+ Create new To do Project";
+    createNewProject.addEventListener("click", createNewProjectButtonPressed)
+    header.appendChild(createNewProject);
+
+
 // the main content of the page. A div that holds the navigation sidebar and the current project display
 let mainContent = document.createElement("div");
     mainContent.id = "mainContent";
@@ -63,7 +84,13 @@ let projectContent = document.createElement("div");
     projectContent.id = "projectContent";
     projectDisplay.appendChild(projectContent);
 
-    createList();
+let createNewTask = document.createElement("div");
+    createNewTask.id = "createNewTask";
+    createNewTask.textContent = "+ Create new task"
+    createNewTask.classList.add("taskContainer")
+    projectContent.appendChild(createNewTask);
+
+    addProjectsToSideBar();
 
 
 
