@@ -1,5 +1,7 @@
 import './style.css';
-import { newProjectForm, addProjectsToSideBar, sideBarProjectClicked } from './toDoFunctions.js';
+import { getProjectTitle, getProjectTitlesArray, addNewProjectToArray } from './toDoFunctions.js';
+import { newProjectFormActivate, newProjectFormDeactivate, addProjectsToSideBar, setProjectTitle, 
+    sideBarProjectClicked } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -37,17 +39,10 @@ let logoBoxThree = document.createElement("div");
     logoBoxThree.classList.add("logoBox");
     logoBoxContainer.appendChild(logoBoxThree);
 
-    //DOES THIS BELONG IN THE INDEX PAGE???
-    // function newProjectForm(){
-    //     console.log("Hi there!")
-    //     let newProjectForm = document.createElement("form");
-    //     newProjectForm.id = "newProjectForm";
-    //     mainContent.appendChild(newProjectForm);
-    // }
+
 // function for the create new project button
 function createNewProjectButtonPressed(){
-    newProjectForm()
-    
+    newProjectFormActivate();
 }
 
 let createNewProject = document.createElement("button");
@@ -64,7 +59,7 @@ let mainContent = document.createElement("div");
 // navigation sidebar
 let sideBar = document.createElement("div");
     sideBar.id = "sideBar";
-    sideBar.textContent = "Projects";
+    sideBar.textContent = "To Do";
     mainContent.appendChild(sideBar);
 //Used in sidebar to display a list of all projects
 let projectListContainer = document.createElement("div");
@@ -84,13 +79,53 @@ let projectContent = document.createElement("div");
     projectContent.id = "projectContent";
     projectDisplay.appendChild(projectContent);
 
+//a div that will allow new tasks to be added to each list
 let createNewTask = document.createElement("div");
     createNewTask.id = "createNewTask";
     createNewTask.textContent = "+ Create new task"
     createNewTask.classList.add("taskContainer")
     projectContent.appendChild(createNewTask);
 
-    addProjectsToSideBar();
+// creates the project Form
+let newProjectForm = document.createElement("form");
+    newProjectForm.id = "newProjectForm";
+    newProjectForm.setAttribute("onsubmit", "return false")
+    newProjectForm.classList.add("hideNewProjectForm");
+    projectDisplay.insertBefore(newProjectForm, currentProjectTitle);
+
+ //Gets the project name
+let title = document.createElement("input");
+    title.id = "title";
+    title.classList.add("formItem");
+    title.setAttribute("placeholder", "Enter The name of Your new To Do List")
+    newProjectForm.appendChild(title);
+
+//Gets the projects first task
+let firstTask = document.createElement("input");
+    firstTask.id = "firstTask";
+    firstTask.classList.add("formItem");
+    firstTask.setAttribute("placeholder", "Enter the first Task in your To Do List")
+    newProjectForm.appendChild(firstTask);
+
+    // creates a button to add the project
+    let addProjectButton = document.createElement("button");
+    addProjectButton.id = "addProjectButton";
+    
+    addProjectButton.addEventListener("click", addProjectButtonClicked);
+    addProjectButton.textContent = "+ Add To Do list";
+    newProjectForm.appendChild(addProjectButton);
+
+// funtion to add the current form as a new project
+function addProjectButtonClicked(){
+    console.log("adding project?");
+    currentProjectTitle.textContent = getProjectTitle();
+    addNewProjectToArray();
+    addProjectsToSideBar(getProjectTitlesArray());
+    newProjectFormDeactivate()
+    
+}
+
+    addProjectsToSideBar(getProjectTitlesArray());
 
 
 
