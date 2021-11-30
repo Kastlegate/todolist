@@ -1,7 +1,8 @@
 import './style.css';
-import { getProjectTitle, getProjectTitlesArray, addNewProjectToArray } from './toDoFunctions.js';
+import { getProjectTitle, getProjectTitlesArray, addNewProjectToArray, getProjectTaskContainterArray, 
+    createListOfTasks, getProjectTask } from './toDoFunctions.js';
 import { newProjectFormActivate, newProjectFormDeactivate, addProjectsToSideBar, setProjectTitle, 
-    sideBarProjectClicked } from './toDoListDom.js';
+    sideBarProjectClicked, addTasksToCurrentProject, createNewTaskInProject } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -79,13 +80,14 @@ let projectContent = document.createElement("div");
     projectContent.id = "projectContent";
     projectDisplay.appendChild(projectContent);
 
+
 //a div that will allow new tasks to be added to each list
 let createNewTask = document.createElement("div");
     createNewTask.id = "createNewTask";
     createNewTask.textContent = "+ Create new task"
+    createNewTask.addEventListener("click", createNewTaskInProject)
     createNewTask.classList.add("taskContainer")
-    projectContent.appendChild(createNewTask);
-
+    
 // creates the project Form
 let newProjectForm = document.createElement("form");
     newProjectForm.id = "newProjectForm";
@@ -119,10 +121,16 @@ let firstTask = document.createElement("input");
 function addProjectButtonClicked(){
     console.log("adding project?");
     currentProjectTitle.textContent = getProjectTitle();
+    createListOfTasks();
+    //calls the function that adds a project to the project array
     addNewProjectToArray();
+    //updates with the new sidebar to do list array and fills all to do projects into the sidebar
     addProjectsToSideBar(getProjectTitlesArray());
-    newProjectFormDeactivate()
-    
+    //deactivates the project form, hiding it again
+    newProjectFormDeactivate();
+    projectContent.textContent = getProjectTask();
+    projectContent.appendChild(createNewTask);
+
 }
 
     addProjectsToSideBar(getProjectTitlesArray());

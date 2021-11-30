@@ -227,6 +227,7 @@ body{
 .taskContainer{
     width: 100%;
     height: fit-content;
+    cursor: pointer;
 }
 
 

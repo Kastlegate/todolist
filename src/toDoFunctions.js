@@ -31,18 +31,35 @@ function addNewProjectToArray(){
     projectTitlesArray.push(title);
 }
 
-let projectTasks = new Array();
+// functions and arrays to handle the to do list tasks
+let projectTaskContainerArray = new Array();
 
-function createNewTask(){
+// tasks for the default to do lists
+projectTaskContainerArray = [new Array("get the battery charged", "get mower out of storage"), new Array("research for best upgrade")]
+
+function getProjectTask(){
+    let firstTask = document.getElementById("firstTask").value;
+    return firstTask;
+}
+
+function createListOfTasks(){
     let projectTasksArray = new Array();
-    
+    let firstTask = document.getElementById("firstTask").value;
+    projectTasksArray = [firstTask]
+    projectTaskContainerArray.push(projectTasksArray);   
+    console.log(projectTaskContainerArray);
 } 
+
+function getProjectTaskContainterArray(){
+    return projectTaskContainerArray;
+}
+
 
 function getProjectPriority(priority){
     priority = priority
-
     return priority;
 }
+
 
 function getProjectDueDate(){
 
@@ -57,4 +74,5 @@ let projectTwo = "Upgrade Computer ram";
 projectTitlesArray = [projectOne, projectTwo];
 
 
-export {  getProjectTitle, getProjectTitlesArray, addNewProjectToArray };
+export {  getProjectTitle, getProjectTitlesArray, addNewProjectToArray, getProjectTaskContainterArray, 
+    createListOfTasks, getProjectTask };
