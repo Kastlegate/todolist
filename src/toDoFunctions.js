@@ -1,3 +1,5 @@
+import { setProjectTitle } from "./toDoListDom";
+
 //factory that is used to create new function projects
 function projectListFactory (title, task, priority, dueDate)
 {
@@ -26,6 +28,11 @@ function getProjectTitlesArray(){
     return projectTitlesArray;
 }
 
+function setProjectTitlesArray(array){
+    projectTitlesArray = array;
+    return projectTitlesArray;
+}
+
 function addNewProjectToArray(){
     let title = document.getElementById("title").value;
     projectTitlesArray.push(title);
@@ -34,14 +41,15 @@ function addNewProjectToArray(){
 // functions and arrays to handle the to do list tasks
 let projectTaskContainerArray = new Array();
 
-// tasks for the default to do lists
+// Outside array of a 2d array. each item inside is an array of tasks on each to do list
 projectTaskContainerArray = [new Array("get the battery charged", "get mower out of storage"), new Array("research for best upgrade")]
 
+// a function that returns the current project task in the form
 function getProjectTask(){
     let firstTask = document.getElementById("firstTask").value;
     return firstTask;
 }
-
+// creates an array that hold a project's tasks and adds it to the projectTaskContainerArray, making a 2d array
 function createListOfTasks(){
     let projectTasksArray = new Array();
     let firstTask = document.getElementById("firstTask").value;
@@ -75,4 +83,4 @@ projectTitlesArray = [projectOne, projectTwo];
 
 
 export {  getProjectTitle, getProjectTitlesArray, addNewProjectToArray, getProjectTaskContainterArray, 
-    createListOfTasks, getProjectTask };
+    createListOfTasks, getProjectTask, setProjectTitlesArray };

@@ -44,7 +44,7 @@ function addProjectsToSideBar(thisArray){
     projectsList.textContent = "";
     array.forEach(element => {
         let projectToBeAddedToList = document.createElement("div");
-        projectToBeAddedToList.id = element + " " +array.indexOf(element);
+        projectToBeAddedToList.id = element + " " + array.indexOf(element);
         projectToBeAddedToList.dataset.sidebarid = array.indexOf(element);
         projectToBeAddedToList.classList.add("sideBarProjectList")
         projectToBeAddedToList.textContent = element;
@@ -54,8 +54,35 @@ function addProjectsToSideBar(thisArray){
     });
 }
 
+function addNewTaskButtonClicked(){
+    console.log('UGH UGH UGH')
+}
+
 function createNewTaskClicked(){
     console.log("creating a new task clicked")
+    let newTaskForm = document.createElement("form");
+    newTaskForm.id = "newTaskForm";
+    newTaskForm.classList.add("newTaskForm");
+    newTaskForm.setAttribute("onsubmit", "return false")
+    // newProjectForm.classList.add("hideNewProjectForm");
+    projectDisplay.insertBefore(newTaskForm, currentProjectTitle);
+
+    //Gets the new task
+    let newTask = document.createElement("input");
+    newTask.id = "newTask";
+    newTask.classList.add("formItem");
+    newTask.setAttribute("placeholder", "New Task")
+    newTaskForm.appendChild(newTask);
+
+    // creates a button to add the project
+    let addnewTaskButton = document.createElement("button");
+    addnewTaskButton.id = "addnewTaskButton";
+    
+    addnewTaskButton.addEventListener("click", addNewTaskButtonClicked);
+    addnewTaskButton.textContent = "+ Add To Do list";
+    newTaskForm.appendChild(addnewTaskButton);
+
+
 }
 
 //a function that will allow new tasks to be added to each to do list

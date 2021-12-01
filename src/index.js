@@ -1,6 +1,6 @@
 import './style.css';
 import { getProjectTitle, getProjectTitlesArray, addNewProjectToArray, getProjectTaskContainterArray, 
-    createListOfTasks, getProjectTask } from './toDoFunctions.js';
+    createListOfTasks, getProjectTask, setProjectTitlesArray } from './toDoFunctions.js';
 import { newProjectFormActivate, newProjectFormDeactivate, addProjectsToSideBar, setProjectTitle, 
     sideBarProjectClicked, addTasksToCurrentProject, createNewTaskInProject } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
@@ -79,14 +79,6 @@ let currentProjectTitle = document.createElement("h1");
 let projectContent = document.createElement("div");
     projectContent.id = "projectContent";
     projectDisplay.appendChild(projectContent);
-
-
-//a div that will allow new tasks to be added to each list
-let createNewTask = document.createElement("div");
-    createNewTask.id = "createNewTask";
-    createNewTask.textContent = "+ Create new task"
-    createNewTask.addEventListener("click", createNewTaskInProject)
-    createNewTask.classList.add("taskContainer")
     
 // creates the project Form
 let newProjectForm = document.createElement("form");
@@ -130,10 +122,58 @@ function addProjectButtonClicked(){
     newProjectFormDeactivate();
     projectContent.textContent = getProjectTask();
     projectContent.appendChild(createNewTask);
+    localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
 
 }
+// if statement that checks if the local storage contains a "titles" string and, if so, populates
+// uses it to fill the projects array. If not, it populates the array with the 2 default titles
+if (localStorage.getItem('titles'))
+{
 
+    // localStorage.removeItem('titles') 
+    console.log(localStorage.getItem('titles'))
+    let array = JSON.parse(window.localStorage.getItem('titles'));
+    
+    console.log(array)
+   
+    setProjectTitlesArray(array);
     addProjectsToSideBar(getProjectTitlesArray());
+}
+else{
+    addProjectsToSideBar(getProjectTitlesArray());
+}
+    // checks to see if local storage is available
+function storageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
+if (storageAvailable('localStorage')) {
+    console.log("Local storage is available");
+  }
+  else {
+    console.log("Local storage is not available");
+  }
 
 
 
