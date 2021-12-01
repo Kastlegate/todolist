@@ -59,7 +59,7 @@ function addNewTaskButtonClicked(){
 }
 
 function createNewTaskClicked(){
-    console.log("creating a new task clicked")
+    let index = this.getAttribute("data-create-new-taskid");
     let newTaskForm = document.createElement("form");
     newTaskForm.id = "newTaskForm";
     newTaskForm.classList.add("newTaskForm");
@@ -81,6 +81,9 @@ function createNewTaskClicked(){
     addnewTaskButton.addEventListener("click", addNewTaskButtonClicked);
     addnewTaskButton.textContent = "+ Add To Do list";
     newTaskForm.appendChild(addnewTaskButton);
+
+    //YOU NEED A FUNCTION THAT CAN USE THE data-create-new-taskid TO FIND THE RIGHT TASK ARRAY AND EDIT IT
+    // THEN ADD THAT TO THE TASK LIST IN PROJECT CONTENT
 
 
 }
@@ -107,6 +110,7 @@ function addTasksToCurrentProject(thisArray, i){
     // createNewTaskInProject();
     let createNewTask = document.createElement("div");
     createNewTask.id = "createNewTask";
+    createNewTask.dataset.createNewTaskid = index;
     createNewTask.textContent = "+ Create new task"
     createNewTask.classList.add("taskContainer");
     createNewTask.addEventListener("click", createNewTaskClicked)

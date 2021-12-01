@@ -121,7 +121,6 @@ function addProjectButtonClicked(){
     //deactivates the project form, hiding it again
     newProjectFormDeactivate();
     projectContent.textContent = getProjectTask();
-    projectContent.appendChild(createNewTask);
     localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
 
 }
