@@ -1,86 +1,43 @@
-import { setProjectTitle } from "./toDoListDom";
+// import {  } from "./toDoListDom";
 
 //factory that is used to create new function projects
-function projectListFactory (title, task, priority, dueDate)
+function projectFactory (title, tasks, priority)
 {
     title = title;
-    task = task;
+    tasks = tasks;
+    //an Array that holds each To do list's tasks
+    let tasksArray = new Array();
+    tasksArray.push(tasks);
     priority = priority;
-    dueDate = dueDate;
-    let fullTask = task + " | Priority: " + priority + " | Due: " + dueDate;
+    // dueDate = dueDate;
 
-            return {
-                title, fullTask
-            } 
+    function addTask(task){
+        tasksArray.push(task);
+    }
+    
+    return { title, tasksArray, addTask }
 }
 
-// the functions and arrays working with the project title
-let projectTitlesArray = new Array();
+let defaultProjectOne = projectFactory("Mow The Lawn", "Charge the battery", "High");
+let defaultProjectTwo = projectFactory("Get stuff for Tacos", "Hamburger", "Medium");
 
+defaultProjectOne.addTask("Get mower out of storage");
+defaultProjectTwo.addTask("Shells");
+defaultProjectTwo.addTask("Shredded Mexican Cheese");
 
-//returns the current value for the "title" form element
-function getProjectTitle(){
-    let title = document.getElementById("title").value;
-    return title;
+let allProjects = new Array();
+allProjects.push(defaultProjectOne);
+allProjects.push(defaultProjectTwo);
+
+function getAllProjectsArray(){
+    return allProjects;
 }
 
-function getProjectTitlesArray(){
-    return projectTitlesArray;
-}
+function getAllProjectsTasksArray(){
 
-function setProjectTitlesArray(array){
-    projectTitlesArray = array;
-    return projectTitlesArray;
-}
-
-function addNewProjectToArray(){
-    let title = document.getElementById("title").value;
-    projectTitlesArray.push(title);
-}
-
-// functions and arrays to handle the to do list tasks
-let projectTaskContainerArray = new Array();
-
-// Outside array of a 2d array. each item inside is an array of tasks on each to do list
-projectTaskContainerArray = [new Array("get the battery charged", "get mower out of storage"), new Array("research for best upgrade")]
-
-// a function that returns the current project task in the form
-function getProjectTask(){
-    let firstTask = document.getElementById("firstTask").value;
-    return firstTask;
-}
-// creates an array that hold a project's tasks and adds it to the projectTaskContainerArray, making a 2d array
-function createListOfTasks(){
-    let projectTasksArray = new Array();
-    let firstTask = document.getElementById("firstTask").value;
-    projectTasksArray = [firstTask]
-    projectTaskContainerArray.push(projectTasksArray);   
-    console.log(projectTaskContainerArray);
-} 
-
-function getProjectTaskContainterArray(){
-    return projectTaskContainerArray;
+    
+    return getAllProjectsArray().taskArray;
 }
 
 
-function getProjectPriority(priority){
-    priority = priority
-    return priority;
-}
-
-
-function getProjectDueDate(){
-
-}
-
-
-
-
-//default projects
-let projectOne = "Mow the Lawn";
-let projectTwo = "Upgrade Computer ram";
-projectTitlesArray = [projectOne, projectTwo];
-
-
-export {  getProjectTitle, getProjectTitlesArray, addNewProjectToArray, getProjectTaskContainterArray, 
-    createListOfTasks, getProjectTask, setProjectTitlesArray };
+ export { getAllProjectsArray, getAllProjectsTasksArray };

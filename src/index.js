@@ -1,8 +1,6 @@
 import './style.css';
-import { getProjectTitle, getProjectTitlesArray, addNewProjectToArray, getProjectTaskContainterArray, 
-    createListOfTasks, getProjectTask, setProjectTitlesArray } from './toDoFunctions.js';
-import { newProjectFormActivate, newProjectFormDeactivate, addProjectsToSideBar, setProjectTitle, 
-    sideBarProjectClicked, addTasksToCurrentProject, createNewTaskInProject } from './toDoListDom.js';
+import { getAllProjectsArray} from './toDoFunctions.js';
+import { addProjectsToSideBar, addTasksToCurrentProject, getAllProjectsTasksArray } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -43,7 +41,9 @@ let logoBoxThree = document.createElement("div");
 
 // function for the create new project button
 function createNewProjectButtonPressed(){
-    newProjectFormActivate();
+    let defaultProject = getAllProjectsArray();
+    console.log(defaultProject);
+    // newProjectFormActivate();
 }
 
 let createNewProject = document.createElement("button");
@@ -111,36 +111,45 @@ let firstTask = document.createElement("input");
 
 // funtion to add the current form as a new project
 function addProjectButtonClicked(){
-    console.log("adding project?");
-    currentProjectTitle.textContent = getProjectTitle();
-    createListOfTasks();
-    //calls the function that adds a project to the project array
-    addNewProjectToArray();
-    //updates with the new sidebar to do list array and fills all to do projects into the sidebar
-    addProjectsToSideBar(getProjectTitlesArray());
-    //deactivates the project form, hiding it again
-    newProjectFormDeactivate();
-    projectContent.textContent = getProjectTask();
-    localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
+
+   
+    // console.log("adding project?");
+    // currentProjectTitle.textContent = getProjectTitle();
+    // createListOfTasks();
+    // //calls the function that adds a project to the project array
+    // addNewProjectToArray();
+    // //updates with the new sidebar to do list array and fills all to do projects into the sidebar
+    // addProjectsToSideBar(getProjectTitlesArray());
+    // //deactivates the project form, hiding it again
+    // newProjectFormDeactivate();
+    // // projectContent.textContent = getProjectTask();
+    // localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
+    // localStorage.setItem('tasks', JSON.stringify(getProjectTaskContainterArray()))
 
 }
 // if statement that checks if the local storage contains a "titles" string and, if so, populates
 // uses it to fill the projects array. If not, it populates the array with the 2 default titles
-if (localStorage.getItem('titles'))
-{
-
-    // localStorage.removeItem('titles') 
-    console.log(localStorage.getItem('titles'))
-    let array = JSON.parse(window.localStorage.getItem('titles'));
+// if (localStorage.getItem('titles'))
+// {
     
-    console.log(array)
+    // localStorage.removeItem('titles')
+    // localStorage.removeItem('tasks')  
+    // console.log(localStorage.getItem('tasks'))
+    
+    // let titlesArray = JSON.parse(window.localStorage.getItem('titles'));
+    // let tasksArray = JSON.parse(window.localStorage.getItem('tasks'));
+    // console.log(tasksArray)
    
-    setProjectTitlesArray(array);
-    addProjectsToSideBar(getProjectTitlesArray());
-}
-else{
-    addProjectsToSideBar(getProjectTitlesArray());
-}
+    // setProjectTitlesArray(titlesArray);
+    // setProjectTaskContainterArray(tasksArray);
+    // addProjectsToSideBar(getProjectTitlesArray());
+// }
+// else{
+//      addProjectsToSideBar(getAllProjectsArray);
+// }
+
+addProjectsToSideBar(getAllProjectsArray());
+addTasksToCurrentProject(getAllProjectsArray())
     // checks to see if local storage is available
 function storageAvailable(type) {
     var storage;

@@ -1,4 +1,4 @@
-import { getProjectTitlesArray, getProjectTaskContainterArray, createListOfTasks } from "./toDoFunctions";
+import {  } from "./toDoFunctions";
 
 // unhides the project form
 function newProjectFormActivate(){
@@ -47,15 +47,22 @@ function addProjectsToSideBar(thisArray){
         projectToBeAddedToList.id = element + " " + array.indexOf(element);
         projectToBeAddedToList.dataset.sidebarid = array.indexOf(element);
         projectToBeAddedToList.classList.add("sideBarProjectList")
-        projectToBeAddedToList.textContent = element;
+        projectToBeAddedToList.textContent = element.title;
         projectToBeAddedToList.addEventListener("click", sideBarProjectClicked)
         projectsList.appendChild(projectToBeAddedToList);
         
     });
 }
-
+let buttonIndex;
 function addNewTaskButtonClicked(){
-    console.log('UGH UGH UGH')
+    console.log("ugh ugh ugh")
+    let index = buttonIndex;
+    
+    let taskArray = getProjectTaskContainterArray();
+    let newTask = getNewProjectTask();
+    console.log(newTask)
+    updateTaskList(taskArray, index, newTask)
+    localStorage.setItem('tasks', JSON.stringify(getProjectTaskContainterArray()))
 }
 
 function createNewTaskClicked(){
@@ -100,9 +107,11 @@ function createNewTaskInProject() {
 }
 
 //adds each task to the projectContent
-function addTasksToCurrentProject(thisArray, i){
-    let index = i;
-    let array = thisArray[index];
+function addTasksToCurrentProject(thisArray){
+    
+    let array = thisArray;
+    let index = array.length;
+    console.log(index);
     let projectContent = document.getElementById("projectContent");
     //erases tasks that are displayed in the project content
     projectContent.textContent = "";
@@ -110,7 +119,7 @@ function addTasksToCurrentProject(thisArray, i){
     // createNewTaskInProject();
     let createNewTask = document.createElement("div");
     createNewTask.id = "createNewTask";
-    createNewTask.dataset.createNewTaskid = index;
+    // createNewTask.dataset.createNewTaskid = index;
     createNewTask.textContent = "+ Create new task"
     createNewTask.classList.add("taskContainer");
     createNewTask.addEventListener("click", createNewTaskClicked)
@@ -119,19 +128,20 @@ function addTasksToCurrentProject(thisArray, i){
     // running through the tasks array and creating an object for each task
     
     array.forEach(element => {
+         var secondKey = Object.keys(element)[1];
+         console.log(secondKey)
         let taskToAdd = document.createElement("div");
-        taskToAdd.id = element;
+        taskToAdd.id = "taskSetId - " + element;
         taskToAdd.dataset.taskid = array.indexOf(element);
         taskToAdd.classList.add("taskContainer")
-        taskToAdd.textContent = element;
+        taskToAdd.textContent = secondKey;
         taskToAdd.addEventListener("click", sideBarProjectClicked)
         projectContent.insertBefore(taskToAdd, createNewTask);
-        console.log("Item in array: " + element)
+        console.log("Item in array: ")
     });
 
 }
 
 
 
-export { newProjectFormActivate , newProjectFormDeactivate, setProjectTitle, addProjectsToSideBar,
-     sideBarProjectClicked, addTasksToCurrentProject, createNewTaskInProject }
+export { addProjectsToSideBar, addTasksToCurrentProject }
