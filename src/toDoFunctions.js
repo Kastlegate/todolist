@@ -15,7 +15,7 @@ function projectFactory (title, tasks, priority)
         tasksArray.push(task);
     }
     
-    return { title, tasksArray, addTask }
+    return { title, tasksArray, priority, addTask }
 }
 
 let defaultProjectOne = projectFactory("Mow The Lawn", "Charge the battery", "High");
@@ -33,11 +33,15 @@ function getAllProjectsArray(){
     return allProjects;
 }
 
-function getAllProjectsTasksArray(){
-
-    
-    return getAllProjectsArray().taskArray;
+function getIndividualProject(i){
+    return allProjects[i];
 }
 
+// function getAllProjectsTasksArray(i){
 
- export { getAllProjectsArray, getAllProjectsTasksArray };
+    
+//     return getAllProjectsArray(i).taskArray;
+// }
+
+
+ export { getAllProjectsArray, getIndividualProject };

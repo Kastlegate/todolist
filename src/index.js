@@ -1,6 +1,6 @@
 import './style.css';
-import { getAllProjectsArray} from './toDoFunctions.js';
-import { addProjectsToSideBar, addTasksToCurrentProject, getAllProjectsTasksArray } from './toDoListDom.js';
+import { getAllProjectsArray } from './toDoFunctions.js';
+import { addProjectsToSideBar, addTasksToCurrentProject, } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -149,7 +149,7 @@ function addProjectButtonClicked(){
 // }
 
 addProjectsToSideBar(getAllProjectsArray());
-addTasksToCurrentProject(getAllProjectsArray())
+// addTasksToCurrentProject(1);
     // checks to see if local storage is available
 function storageAvailable(type) {
     var storage;
