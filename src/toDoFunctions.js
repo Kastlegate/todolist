@@ -37,11 +37,10 @@ function getIndividualProject(i){
     return allProjects[i];
 }
 
-// function getAllProjectsTasksArray(i){
+function addProject(title, task, priority){
+    let newProject = projectFactory(document.getElementById("title").value, document.getElementById("firstTask").value, priority)
+    allProjects.push(newProject);
+}
 
-    
-//     return getAllProjectsArray(i).taskArray;
-// }
 
-
- export { getAllProjectsArray, getIndividualProject };
+ export { getAllProjectsArray, getIndividualProject, addProject };

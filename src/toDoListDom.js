@@ -21,6 +21,8 @@ function newProjectFormDeactivate(){
     let form = document.getElementById("newProjectForm");
     form.className = "";    
     newProjectForm.classList.add("hideNewProjectForm")
+    document.getElementById("title").value = "";
+    document.getElementById("firstTask").value = "";
 }
 
 //function to be called when a project from the list in the sidebar is clicked
@@ -139,4 +141,4 @@ function addTasksToCurrentProject(i){
 
 
 
-export { addProjectsToSideBar, addTasksToCurrentProject }
+export { addProjectsToSideBar, addTasksToCurrentProject, newProjectFormActivate, newProjectFormDeactivate }

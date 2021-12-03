@@ -1,6 +1,6 @@
 import './style.css';
-import { getAllProjectsArray } from './toDoFunctions.js';
-import { addProjectsToSideBar, addTasksToCurrentProject, } from './toDoListDom.js';
+import { getAllProjectsArray, addProject } from './toDoFunctions.js';
+import { addProjectsToSideBar, addTasksToCurrentProject, newProjectFormActivate, newProjectFormDeactivate } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -43,7 +43,7 @@ let logoBoxThree = document.createElement("div");
 function createNewProjectButtonPressed(){
     let defaultProject = getAllProjectsArray();
     console.log(defaultProject);
-    // newProjectFormActivate();
+    newProjectFormActivate();
 }
 
 let createNewProject = document.createElement("button");
@@ -113,15 +113,20 @@ let firstTask = document.createElement("input");
 function addProjectButtonClicked(){
 
    
-    // console.log("adding project?");
+     console.log("adding project?");
+     currentProjectTitle.textContent = document.getElementById("title").value;
+     addProject();
+     addProjectsToSideBar(getAllProjectsArray());
+     //deactivates the project form, hiding it again
+     newProjectFormDeactivate();
+
     // currentProjectTitle.textContent = getProjectTitle();
     // createListOfTasks();
     // //calls the function that adds a project to the project array
     // addNewProjectToArray();
     // //updates with the new sidebar to do list array and fills all to do projects into the sidebar
     // addProjectsToSideBar(getProjectTitlesArray());
-    // //deactivates the project form, hiding it again
-    // newProjectFormDeactivate();
+    
     // // projectContent.textContent = getProjectTask();
     // localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
     // localStorage.setItem('tasks', JSON.stringify(getProjectTaskContainterArray()))
@@ -145,11 +150,11 @@ function addProjectButtonClicked(){
     // addProjectsToSideBar(getProjectTitlesArray());
 // }
 // else{
-//      addProjectsToSideBar(getAllProjectsArray);
+//      addProjectsToSideBar(getAllProjectsArray());
 // }
 
 addProjectsToSideBar(getAllProjectsArray());
-// addTasksToCurrentProject(1);
+
     // checks to see if local storage is available
 function storageAvailable(type) {
     var storage;
