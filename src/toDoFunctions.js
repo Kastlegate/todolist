@@ -9,20 +9,20 @@ function projectFactory (title, tasks, priority)
     let tasksArray = new Array();
     tasksArray.push(tasks);
     // an array that holds all finsished and checked tasks
-    let finsihedTasksArray = new Array();
+    let finishedTasksArray = new Array();
 
     priority = priority;
     // dueDate = dueDate;
 
     function removeTask(task){
-        finsihedTasksArray.push(task);
+        finishedTasksArray.push(task);
     }
 
     function addTask(task){
         tasksArray.push(task);
     }
 
-    return { title, tasksArray, finsihedTasksArray, priority, removeTask, addTask }
+    return { title, tasksArray, finishedTasksArray, priority, removeTask, addTask }
 }
 
 let defaultProjectOne = projectFactory("Mow The Lawn", "Charge the battery", "High");

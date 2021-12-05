@@ -102,17 +102,34 @@ function createNewTaskClicked(){
 }
 
 // deletes an item from the current to do list
-function actTaskInListClicked(){
-    
+function activeTaskInListClicked(){
+    // uses the data-array-id to get the current object's taskArray;
     let array = this.getAttribute("data-array-id")
+    // uses the data-task-id to get the current task inside the array
     let index = this.getAttribute("data-task-id")
-    this.classList.add("taskChecked") 
     let checkMarkedTask = getIndividualProject(array).tasksArray[index];
-    getIndividualProject(array).removeTask(checkMarkedTask)
-    console.log("task added to finishedTasksArray: " + getIndividualProject(array).finsihedTasksArray);
+    getIndividualProject(array).removeTask(checkMarkedTask);
+    console.log("task added to finishedTasksArray: " + getIndividualProject(array).finishedTasksArray);
 
     if (index > -1) {
         getIndividualProject(array).tasksArray.splice(index, 1);}
+
+        addTasksToCurrentProject(array);
+
+}
+
+// reinserts an item from the finished tasks back into active tasks
+function inactiveTaskInListClicked(){
+    // uses the data-array-id to get the current object's taskArray;
+    let array = this.getAttribute("data-finsihed-array-id")
+    // uses the data-task-id to get the current task inside the array
+    let index = this.getAttribute("data-checkmarked-task-id")
+    let checkMarkedTask = getIndividualProject(array).finishedTasksArray[index];
+    getIndividualProject(array).addTask(checkMarkedTask);
+    console.log("task added to TasksArray: " + getIndividualProject(array).finishedTasksArray);
+
+    if (index > -1) {
+        getIndividualProject(array).finishedTasksArray.splice(index, 1);}
 
         addTasksToCurrentProject(array);
 
@@ -153,14 +170,14 @@ function addTasksToCurrentProject(i){
         taskToAdd.dataset.arrayId = index;
         taskToAdd.classList.add("taskTextContainer")
         taskToAdd.textContent = element;
-        taskToAdd.addEventListener("click", actTaskInListClicked)
+        taskToAdd.addEventListener("click", activeTaskInListClicked)
         activeContainer.appendChild(taskToAdd);
     
     });
 
     // similar for each running through the  finishedTasks array and creating an object for each task
     // and adding it to the projectContent    
-    array.finsihedTasksArray.forEach(element => {
+    array.finishedTasksArray.forEach(element => {
 
         // container for each completed and check marked task
         let inactiveContainer = document.createElement("div");
@@ -171,12 +188,12 @@ function addTasksToCurrentProject(i){
         //creates a div which holds the task that is added
         let checkMarkedtaskToAdd = document.createElement("div");
         checkMarkedtaskToAdd.id = element;
-        checkMarkedtaskToAdd.dataset.checkmarkedTaskId = array.finsihedTasksArray.indexOf(element);
-        checkMarkedtaskToAdd.dataset.arrayId = index;
+        checkMarkedtaskToAdd.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
+        checkMarkedtaskToAdd.dataset.finsihedArrayId = index;
         checkMarkedtaskToAdd.classList.add("taskChecked")
         checkMarkedtaskToAdd.classList.add("taskTextContainer")
         checkMarkedtaskToAdd.textContent = element;
-        // checkMarkedtaskToAdd.addEventListener("click", taskInListClicked)
+        checkMarkedtaskToAdd.addEventListener("click", inactiveTaskInListClicked)
         inactiveContainer.appendChild(checkMarkedtaskToAdd);
     
     });
