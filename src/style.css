@@ -5,12 +5,16 @@ body{
     margin: auto;
     display: flex;
     flex-direction: column;
-    animation: fadeIn 1s;
+    
 }
 
 @keyframes fadeIn {
     0%{
-        opacity: .2;
+        opacity: .0;
+    }
+
+    50%{
+        opacity: .0;
     }
 
     100%{
@@ -36,7 +40,7 @@ body{
     margin-top: 0px;
     display: flex;
     flex-direction: row;
-    animation: dropDown 3s;
+    animation: dropDown 1s;
     /* margin: auto; */
     
 }
@@ -167,14 +171,11 @@ body{
     margin-top: 5px;
 }
 
-
 #addProjectButton{
     /* position: relative;
     float: right;
     bottom: 0%; */
 }
-
-
 
 #mainContent{
     margin-top: 45px;
@@ -184,6 +185,7 @@ body{
     flex-direction: row;
     box-sizing:border-box;
     position:fixed; /* reason page won't scroll down will need to be fixed */
+    animation: fadeIn 2s;
 }
 
 #sideBar{
@@ -243,9 +245,23 @@ body{
 
 /* style for each task, bullet, due date and priority container */
 .taskContainer{
-    width: 100%;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    width: 70%;
     height: fit-content;
     cursor: pointer;
+    margin: auto;
+    /* border: 1px solid rgb(255, 255, 255); */
 }
 
+.taskTextContainer{
+    width: 70%;
+    height: fit-content;
+    cursor: pointer;
+    margin: auto;
+    text-align: left;
+}
 
+.taskChecked{
+    text-decoration: line-through;
+}

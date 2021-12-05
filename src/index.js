@@ -135,49 +135,6 @@ let newTaskForm = document.createElement("form");
     newTaskForm.appendChild(addnewTaskButton);
     
 
-// // funtion to add the current form as a new project
-// function addProjectButtonClicked(){
-
-   
-//      console.log("adding project?");
-//      currentProjectTitle.textContent = document.getElementById("title").value;
-//      addProject();
-//      addProjectsToSideBar(getAllProjectsArray());
-//      //deactivates the project form, hiding it again
-//      newProjectFormDeactivate();
-
-//     // currentProjectTitle.textContent = getProjectTitle();
-//     // createListOfTasks();
-//     // //calls the function that adds a project to the project array
-//     // addNewProjectToArray();
-//     // //updates with the new sidebar to do list array and fills all to do projects into the sidebar
-//     // addProjectsToSideBar(getProjectTitlesArray());
-    
-//     // // projectContent.textContent = getProjectTask();
-//     // localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
-//     // localStorage.setItem('tasks', JSON.stringify(getProjectTaskContainterArray()))
-
-// }
-// if statement that checks if the local storage contains a "titles" string and, if so, populates
-// uses it to fill the projects array. If not, it populates the array with the 2 default titles
-// if (localStorage.getItem('titles'))
-// {
-    
-    // localStorage.removeItem('titles')
-    // localStorage.removeItem('tasks')  
-    // console.log(localStorage.getItem('tasks'))
-    
-    // let titlesArray = JSON.parse(window.localStorage.getItem('titles'));
-    // let tasksArray = JSON.parse(window.localStorage.getItem('tasks'));
-    // console.log(tasksArray)
-   
-    // setProjectTitlesArray(titlesArray);
-    // setProjectTaskContainterArray(tasksArray);
-    // addProjectsToSideBar(getProjectTitlesArray());
-// }
-// else{
-//      addProjectsToSideBar(getAllProjectsArray());
-// }
 
 addProjectsToSideBar(getAllProjectsArray());
 
