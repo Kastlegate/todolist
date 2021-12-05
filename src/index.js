@@ -1,6 +1,8 @@
 import './style.css';
 import { getAllProjectsArray, addProject } from './toDoFunctions.js';
-import { addProjectsToSideBar, addTasksToCurrentProject, newProjectFormActivate, newProjectFormDeactivate } from './toDoListDom.js';
+import { addProjectsToSideBar, addTasksToCurrentProject, newProjectFormActivate, 
+    newProjectFormDeactivate, newTaskFormActivate, newTaskFormDeactivate, addNewTaskButtonClicked, 
+    addProjectButtonClicked } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -80,11 +82,11 @@ let projectContent = document.createElement("div");
     projectContent.id = "projectContent";
     projectDisplay.appendChild(projectContent);
     
-// creates the project Form
+// creates the new Project Form
 let newProjectForm = document.createElement("form");
     newProjectForm.id = "newProjectForm";
     newProjectForm.setAttribute("onsubmit", "return false")
-    newProjectForm.classList.add("hideNewProjectForm");
+    newProjectForm.classList.add("hideForm");
     projectDisplay.insertBefore(newProjectForm, currentProjectTitle);
 
  //Gets the project name
@@ -109,29 +111,53 @@ let firstTask = document.createElement("input");
     addProjectButton.textContent = "+ Add To Do list";
     newProjectForm.appendChild(addProjectButton);
 
-// funtion to add the current form as a new project
-function addProjectButtonClicked(){
+// Creates a form to collect a new task to add to the To Do List
+let newTaskForm = document.createElement("form");
+    newTaskForm.id = "newTaskForm";
+    newTaskForm.classList.add("newTaskForm");
+    newTaskForm.classList.add("hideForm");
+    newTaskForm.setAttribute("onsubmit", "return false")
+    // newProjectForm.classList.add("hideNewProjectForm");
+    projectDisplay.insertBefore(newTaskForm, currentProjectTitle);
+
+    //Gets the new task
+    let newTask = document.createElement("input");
+    newTask.id = "newTask";
+    newTask.classList.add("formItem");
+    newTask.setAttribute("placeholder", "New Task")
+    newTaskForm.appendChild(newTask);
+
+    let addnewTaskButton = document.createElement("button");
+    addnewTaskButton.id = "addnewTaskButton";
+    addnewTaskButton.addEventListener("click", addNewTaskButtonClicked)
+    addnewTaskButton.textContent = "+ Add To Do list";
+    
+    newTaskForm.appendChild(addnewTaskButton);
+    
+
+// // funtion to add the current form as a new project
+// function addProjectButtonClicked(){
 
    
-     console.log("adding project?");
-     currentProjectTitle.textContent = document.getElementById("title").value;
-     addProject();
-     addProjectsToSideBar(getAllProjectsArray());
-     //deactivates the project form, hiding it again
-     newProjectFormDeactivate();
+//      console.log("adding project?");
+//      currentProjectTitle.textContent = document.getElementById("title").value;
+//      addProject();
+//      addProjectsToSideBar(getAllProjectsArray());
+//      //deactivates the project form, hiding it again
+//      newProjectFormDeactivate();
 
-    // currentProjectTitle.textContent = getProjectTitle();
-    // createListOfTasks();
-    // //calls the function that adds a project to the project array
-    // addNewProjectToArray();
-    // //updates with the new sidebar to do list array and fills all to do projects into the sidebar
-    // addProjectsToSideBar(getProjectTitlesArray());
+//     // currentProjectTitle.textContent = getProjectTitle();
+//     // createListOfTasks();
+//     // //calls the function that adds a project to the project array
+//     // addNewProjectToArray();
+//     // //updates with the new sidebar to do list array and fills all to do projects into the sidebar
+//     // addProjectsToSideBar(getProjectTitlesArray());
     
-    // // projectContent.textContent = getProjectTask();
-    // localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
-    // localStorage.setItem('tasks', JSON.stringify(getProjectTaskContainterArray()))
+//     // // projectContent.textContent = getProjectTask();
+//     // localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
+//     // localStorage.setItem('tasks', JSON.stringify(getProjectTaskContainterArray()))
 
-}
+// }
 // if statement that checks if the local storage contains a "titles" string and, if so, populates
 // uses it to fill the projects array. If not, it populates the array with the 2 default titles
 // if (localStorage.getItem('titles'))
