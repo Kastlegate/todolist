@@ -1,5 +1,7 @@
 import { getAllProjectsArray, getIndividualProject, addProject } from "./toDoFunctions";
 
+
+
 // unhides the New Project project form
 function newProjectFormActivate(){
     let form = document.getElementById("newProjectForm");
@@ -163,14 +165,21 @@ function addTasksToCurrentProject(i){
         activeContainer.classList.add("taskContainer")
         projectContent.insertBefore(activeContainer, createNewTask);
 
+        //creates an un-checkmarked box
+        let notCheckedMarkedBox = document.createElement("div");
+        notCheckedMarkedBox.className = "far fa-square";
+        notCheckedMarkedBox.addEventListener("click", activeTaskInListClicked)
+        notCheckedMarkedBox.dataset.taskId = array.tasksArray.indexOf(element);
+        notCheckedMarkedBox.dataset.arrayId = index;
+        activeContainer.appendChild(notCheckedMarkedBox);
         //creates a div which holds the task that is added
         let taskToAdd = document.createElement("div");
         taskToAdd.id = element;
-        taskToAdd.dataset.taskId = array.tasksArray.indexOf(element);
-        taskToAdd.dataset.arrayId = index;
+        // taskToAdd.dataset.taskId = array.tasksArray.indexOf(element);
+        // taskToAdd.dataset.arrayId = index;
         taskToAdd.classList.add("taskTextContainer")
         taskToAdd.textContent = element;
-        taskToAdd.addEventListener("click", activeTaskInListClicked)
+        // taskToAdd.addEventListener("click", activeTaskInListClicked)
         activeContainer.appendChild(taskToAdd);
     
     });
@@ -185,15 +194,23 @@ function addTasksToCurrentProject(i){
         inactiveContainer.classList.add("taskContainer")
         projectContent.appendChild(inactiveContainer);
 
+        //creates a checkmarked box
+        let checkedMarkedBox = document.createElement("div");
+        checkedMarkedBox.className = "far fa-check-square";
+        checkedMarkedBox.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
+        checkedMarkedBox.dataset.finsihedArrayId = index;
+        checkedMarkedBox.addEventListener("click", inactiveTaskInListClicked)
+        inactiveContainer.appendChild(checkedMarkedBox);
+        
         //creates a div which holds the task that is added
         let checkMarkedtaskToAdd = document.createElement("div");
         checkMarkedtaskToAdd.id = element;
-        checkMarkedtaskToAdd.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
-        checkMarkedtaskToAdd.dataset.finsihedArrayId = index;
+        // checkMarkedtaskToAdd.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
+        // checkMarkedtaskToAdd.dataset.finsihedArrayId = index;
         checkMarkedtaskToAdd.classList.add("taskChecked")
         checkMarkedtaskToAdd.classList.add("taskTextContainer")
         checkMarkedtaskToAdd.textContent = element;
-        checkMarkedtaskToAdd.addEventListener("click", inactiveTaskInListClicked)
+        // checkMarkedtaskToAdd.addEventListener("click", inactiveTaskInListClicked)
         inactiveContainer.appendChild(checkMarkedtaskToAdd);
     
     });

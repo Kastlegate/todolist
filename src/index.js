@@ -27,17 +27,17 @@ let logoBoxContainer = document.createElement("div")
     logoBoxContainer.id = "logoBoxContainer";
     logoContainer.appendChild(logoBoxContainer)    
 // little boxes for the logo
-let logoBoxOne = document.createElement("div");
-    logoBoxOne.id = "logoBoxOne";
-    logoBoxOne.classList.add("logoBox");
-    logoBoxContainer.appendChild(logoBoxOne);
+// let logoBoxOne = document.createElement("div");
+//     logoBoxOne.id = "logoBoxOne";
+//     logoBoxOne.className = "far fa-square";
+//     logoBoxContainer.appendChild(logoBoxOne);
 let logoBoxTwo = document.createElement("div");
     logoBoxTwo.id = "logoBoxTwo";
-    logoBoxTwo.classList.add("logoBox");
+    logoBoxTwo.className = "far fa-square";
     logoBoxContainer.appendChild(logoBoxTwo);
 let logoBoxThree = document.createElement("div");
     logoBoxThree.id = "logoBoxThree";
-    logoBoxThree.classList.add("logoBox");
+    logoBoxThree.className = "far fa-check-square";
     logoBoxContainer.appendChild(logoBoxThree);
 
 
@@ -62,8 +62,12 @@ let mainContent = document.createElement("div");
 // navigation sidebar
 let sideBar = document.createElement("div");
     sideBar.id = "sideBar";
-    sideBar.textContent = "To Do";
     mainContent.appendChild(sideBar);
+    let sideBarInfo = document.createElement("div");
+    sideBarInfo.id = "sideBarInfo"
+    sideBarInfo.textContent = "To Do";
+    sideBar.appendChild(sideBarInfo);
+
 //Used in sidebar to display a list of all projects
 let projectListContainer = document.createElement("div");
     projectListContainer.id = "projectListContainer";
