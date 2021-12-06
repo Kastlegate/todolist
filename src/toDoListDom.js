@@ -137,6 +137,24 @@ function inactiveTaskInListClicked(){
 
 }
 
+// listener for the delete task button
+function deleteTaskClicked() {
+    // uses the data-array-id to get the current object's taskArray;
+    let array = this.getAttribute("data-delete-Finsihed-array-id")
+    // uses the data-task-id to get the current task inside the array
+    let index = this.getAttribute("data-delete-task-id")
+    // let checkMarkedTask = getIndividualProject(array).finishedTasksArray[index];
+    // getIndividualProject(array).addTask(checkMarkedTask);
+    console.log("deleted task: " + getIndividualProject(array).finishedTasksArray);
+
+    if (index > -1) {
+        getIndividualProject(array).finishedTasksArray.splice(index, 1);}
+
+        addTasksToCurrentProject(array);
+
+}
+
+
 //adds each task to the projectContent depending on which To Do is inserted as an argument
 function addTasksToCurrentProject(i){
     
@@ -181,10 +199,15 @@ function addTasksToCurrentProject(i){
         taskToAdd.textContent = element;
         // taskToAdd.addEventListener("click", activeTaskInListClicked)
         activeContainer.appendChild(taskToAdd);
+
+        // //creates a delete button to remove a task permanently
+        // let deleteTask = document.createElement("div")
+        // deleteTask.className = "fas fa-trash-alt";
+        // activeContainer.appendChild(deleteTask);
     
     });
 
-    // similar for each running through the  finishedTasks array and creating an object for each task
+    // similar for each running through the finishedTasks array and creating an object for each task
     // and adding it to the projectContent    
     array.finishedTasksArray.forEach(element => {
 
@@ -205,14 +228,19 @@ function addTasksToCurrentProject(i){
         //creates a div which holds the task that is added
         let checkMarkedtaskToAdd = document.createElement("div");
         checkMarkedtaskToAdd.id = element;
-        // checkMarkedtaskToAdd.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
-        // checkMarkedtaskToAdd.dataset.finsihedArrayId = index;
         checkMarkedtaskToAdd.classList.add("taskChecked")
         checkMarkedtaskToAdd.classList.add("taskTextContainer")
         checkMarkedtaskToAdd.textContent = element;
         // checkMarkedtaskToAdd.addEventListener("click", inactiveTaskInListClicked)
         inactiveContainer.appendChild(checkMarkedtaskToAdd);
-    
+
+        //creates a delete button to remove a task permanently
+        let deleteTask = document.createElement("div")
+        deleteTask.className = "fas fa-trash-alt";
+        deleteTask.dataset.deleteTaskId = array.finishedTasksArray.indexOf(element);
+        deleteTask.dataset.deleteFinsihedArrayId = index;
+        deleteTask.addEventListener("click", deleteTaskClicked)
+        inactiveContainer.appendChild(deleteTask);    
     });
 
 

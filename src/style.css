@@ -276,3 +276,17 @@ body{
 .taskChecked{
     text-decoration: line-through;
 }
+
+.taskCheckedAnimation{
+    animation: deletedTask 1s
+}
+
+@keyframes deletedTask{
+    0%{
+        opacity: .1;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
