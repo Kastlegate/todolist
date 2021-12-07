@@ -1,4 +1,5 @@
 import './style.css';
+import './all.css';
 import { getAllProjectsArray, addProject } from './toDoFunctions.js';
 import { addProjectsToSideBar, addTasksToCurrentProject, newProjectFormActivate, 
     newProjectFormDeactivate, newTaskFormActivate, newTaskFormDeactivate, addNewTaskButtonClicked, 
