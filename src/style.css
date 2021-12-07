@@ -13,9 +13,7 @@ body{
         opacity: .0;
     }
 
-    50%{
-        opacity: .0;
-    }
+
 
     100%{
        opacity: 1;
@@ -40,7 +38,7 @@ body{
     margin-top: 0px;
     display: flex;
     flex-direction: row;
-    animation: dropDown 1s;
+    animation: dropDown 2s;
     /* margin: auto; */
     
 }
@@ -81,11 +79,7 @@ body{
     box-sizing:border-box;
 }
 
-#createNewProject{
-    float: right;
-    width: fit-content;
-    margin-left: 20%;
-}
+
 
 .hideForm{
     height: 80%;
@@ -203,9 +197,16 @@ body{
     color: white;
     font-size: 150%;
     margin-top: 5px;
-    width: 60%;
-    margin: auto;
+    width: 50%;
+    margin-left: 25%;
     text-align: center;
+}
+
+#createNewProject{
+    /* float: right; */
+    width: fit-content;
+    margin-top: 5px;
+    margin-left: 10px;
 }
 
 .sideBarProjectList{
@@ -275,18 +276,4 @@ body{
 
 .taskChecked{
     text-decoration: line-through;
-}
-
-.taskCheckedAnimation{
-    animation: deletedTask 1s
-}
-
-@keyframes deletedTask{
-    0%{
-        opacity: .1;
-    }
-
-    100%{
-        opacity: 1;
-    }
 }

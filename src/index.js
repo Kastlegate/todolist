@@ -48,12 +48,6 @@ function createNewProjectButtonPressed(){
     newProjectFormActivate();
 }
 
-let createNewProject = document.createElement("button");
-    createNewProject.id = "createNewProject";
-    createNewProject.textContent = "+ Create new To do Project";
-    createNewProject.addEventListener("click", createNewProjectButtonPressed)
-    header.appendChild(createNewProject);
-
 
 // the main content of the page. A div that holds the navigation sidebar and the current project display
 let mainContent = document.createElement("div");
@@ -67,6 +61,13 @@ let sideBar = document.createElement("div");
     sideBarInfo.id = "sideBarInfo"
     sideBarInfo.textContent = "To Do";
     sideBar.appendChild(sideBarInfo);
+
+    let createNewProject = document.createElement("div");
+    createNewProject.id = "createNewProject";
+    createNewProject.title = "Create New To Do List"
+    createNewProject.className = "fas fa-plus-circle"
+    createNewProject.addEventListener("click", createNewProjectButtonPressed)
+    sideBarInfo.appendChild(createNewProject);
 
 //Used in sidebar to display a list of all projects
 let projectListContainer = document.createElement("div");
