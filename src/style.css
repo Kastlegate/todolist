@@ -207,7 +207,13 @@ body{
     width: fit-content;
     margin-top: 5px;
     margin-left: 10px;
+    transition: all 0.3s ease-in-out 0s; 
 }
+
+#createNewProject:hover {
+    scale: 125%;
+    transform: rotate(180deg);
+  }
 
 .sideBarProjectList{
     color: white;

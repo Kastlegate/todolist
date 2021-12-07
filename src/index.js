@@ -1,9 +1,9 @@
 import './style.css';
 import './all.css';
-import { getAllProjectsArray, addProject } from './toDoFunctions.js';
+import { getAllProjectsArray, addProject, setallProjects, } from './toDoFunctions.js';
 import { addProjectsToSideBar, addTasksToCurrentProject, newProjectFormActivate, 
     newProjectFormDeactivate, newTaskFormActivate, newTaskFormDeactivate, addNewTaskButtonClicked, 
-    addProjectButtonClicked } from './toDoListDom.js';
+    addProjectButtonClicked, addnewProjectCancelClicked } from './toDoListDom.js';
 import { compareAsc, format } from 'date-fns'
 
 
@@ -111,11 +111,16 @@ let firstTask = document.createElement("input");
 
     // creates a button to add the project
     let addProjectButton = document.createElement("button");
-    addProjectButton.id = "addProjectButton";
-    
+    addProjectButton.id = "addProjectButton";    
     addProjectButton.addEventListener("click", addProjectButtonClicked);
     addProjectButton.textContent = "+ Add To Do list";
     newProjectForm.appendChild(addProjectButton);
+    // creates a button to cancel the form entry
+    let addnewProjectCancel = document.createElement("button");
+    addnewProjectCancel.id = "addnewProjectCancel";
+    addnewProjectCancel.addEventListener("click", addnewProjectCancelClicked)
+    addnewProjectCancel.textContent = "Cancel";    
+    newProjectForm.appendChild(addnewProjectCancel);
 
 // Creates a form to collect a new task to add to the To Do List
 let newTaskForm = document.createElement("form");
@@ -136,13 +141,26 @@ let newTaskForm = document.createElement("form");
     let addnewTaskButton = document.createElement("button");
     addnewTaskButton.id = "addnewTaskButton";
     addnewTaskButton.addEventListener("click", addNewTaskButtonClicked)
-    addnewTaskButton.textContent = "+ Add To Do list";
-    
+    addnewTaskButton.textContent = "+ Add To Do list";    
     newTaskForm.appendChild(addnewTaskButton);
     
+    
+
+if (localStorage.getItem('projects'))
+{
+    console.log("is present")
+    let projectsArray = JSON.parse(window.localStorage.getItem('projects'));
+    console.log(projectsArray)
+    setallProjects(projectsArray)
+    addProjectsToSideBar(getAllProjectsArray());
+}
+
+else{
+    console.log("is not present")
+    addProjectsToSideBar(getAllProjectsArray());
+}
 
 
-addProjectsToSideBar(getAllProjectsArray());
 
     // checks to see if local storage is available
 function storageAvailable(type) {
@@ -177,8 +195,9 @@ if (storageAvailable('localStorage')) {
     console.log("Local storage is not available");
   }
 
-
-
+  localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
+//   localStorage.removeItem('projects', JSON.stringify(getAllProjectsArray()))
+  
 
 
 

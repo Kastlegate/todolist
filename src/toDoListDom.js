@@ -1,4 +1,4 @@
-import { getAllProjectsArray, getIndividualProject, addProject } from "./toDoFunctions";
+import { getAllProjectsArray, getIndividualProject, addProject, addTask, removeTask } from "./toDoFunctions";
 
 
 
@@ -72,12 +72,17 @@ function addProjectButtonClicked(){
     // Displays the newly created project's initial task
     let index = getAllProjectsArray().length - 1;
     addTasksToCurrentProject(index);
+    localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
 
    
    // // projectContent.textContent = getProjectTask();
    // localStorage.setItem('titles', JSON.stringify(getProjectTitlesArray()))
    // localStorage.setItem('tasks', JSON.stringify(getProjectTaskContainterArray()))
 
+}
+
+function addnewProjectCancelClicked(){
+    newProjectFormDeactivate();
 }
 
 // listener that adds a new task to the list if the add new task button is clicked
@@ -100,6 +105,7 @@ function createNewTaskClicked(){
     // creates a button to add the project
     let addnewTaskButton = document.getElementById("addnewTaskButton")
     addnewTaskButton.dataset.addTaskId = index; 
+    localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
 
 }
 
@@ -110,7 +116,7 @@ function activeTaskInListClicked(){
     // uses the data-task-id to get the current task inside the array
     let index = this.getAttribute("data-task-id")
     let checkMarkedTask = getIndividualProject(array).tasksArray[index];
-    getIndividualProject(array).removeTask(checkMarkedTask);
+    removeTask(getIndividualProject(array), checkMarkedTask);
     console.log("task added to finishedTasksArray: " + getIndividualProject(array).finishedTasksArray);
 
     if (index > -1) {
@@ -118,6 +124,7 @@ function activeTaskInListClicked(){
 
         addTasksToCurrentProject(array);
 
+        localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
 }
 
 // reinserts an item from the finished tasks back into active tasks
@@ -127,7 +134,8 @@ function inactiveTaskInListClicked(){
     // uses the data-task-id to get the current task inside the array
     let index = this.getAttribute("data-checkmarked-task-id")
     let checkMarkedTask = getIndividualProject(array).finishedTasksArray[index];
-    getIndividualProject(array).addTask(checkMarkedTask);
+    addTask(getIndividualProject(array), checkMarkedTask);
+    // getIndividualProject(array).addTask(checkMarkedTask);
     console.log("task added to TasksArray: " + getIndividualProject(array).finishedTasksArray);
 
     if (index > -1) {
@@ -242,11 +250,11 @@ function addTasksToCurrentProject(i){
         deleteTask.addEventListener("click", deleteTaskClicked)
         inactiveContainer.appendChild(deleteTask);    
     });
-
+    localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
 
 }
 
 
 
 export { addProjectsToSideBar, addTasksToCurrentProject, newProjectFormActivate, newProjectFormDeactivate, newTaskFormActivate,
-    newTaskFormDeactivate, addNewTaskButtonClicked, addProjectButtonClicked }
+    newTaskFormDeactivate, addNewTaskButtonClicked, addProjectButtonClicked, addnewProjectCancelClicked }

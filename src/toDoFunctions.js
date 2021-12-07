@@ -14,27 +14,42 @@ function projectFactory (title, tasks, priority)
     priority = priority;
     // dueDate = dueDate;
 
-    function removeTask(task){
-        finishedTasksArray.push(task);
-    }
+    // function removeTask(task){
+    //     finishedTasksArray.push(task);
+    // }
 
-    function addTask(task){
-        tasksArray.push(task);
-    }
+    // function addTask(task){
+    //     tasksArray.push(task);
+    // }
 
-    return { title, tasksArray, finishedTasksArray, priority, removeTask, addTask }
+    return { title, tasksArray, finishedTasksArray, priority, }
+}
+
+//  adds a task to the tasksArray
+function addTask(array, task){
+    array.tasksArray.push(task);
+}
+
+//adds a task to the completed task array
+function removeTask(array, task){
+    array.finishedTasksArray.push(task);
 }
 
 let defaultProjectOne = projectFactory("Mow The Lawn", "Charge the battery", "High");
 let defaultProjectTwo = projectFactory("Get stuff for Tacos", "Hamburger", "Medium");
 
-defaultProjectOne.addTask("Get mower out of storage");
-defaultProjectTwo.addTask("Shells");
-defaultProjectTwo.addTask("Shredded Mexican Cheese");
+
+// defaultProjectOne.addTask("Get mower out of storage");
+// defaultProjectTwo.addTask("Shells");
+// defaultProjectTwo.addTask("Shredded Mexican Cheese");
 
 let allProjects = new Array();
 allProjects.push(defaultProjectOne);
 allProjects.push(defaultProjectTwo);
+
+addTask(allProjects[0], "Get mower out of storage");
+addTask(allProjects[1], "Shells");
+addTask(allProjects[1], "Shredded Mexican Cheese");
 
 function getAllProjectsArray(){
     return allProjects;
@@ -50,5 +65,10 @@ function addProject(title, task, priority){
     allProjects.push(newProject);
 }
 
+function setallProjects(array){
+    allProjects = array;
+    return allProjects;
+}
 
- export { getAllProjectsArray, getIndividualProject, addProject };
+
+ export { getAllProjectsArray, getIndividualProject, addProject, setallProjects, addTask, removeTask };
