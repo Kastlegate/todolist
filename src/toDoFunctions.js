@@ -58,16 +58,11 @@ function removeTask(array, tasks, priority){
 let defaultProjectOne = projectFactory("Mow The Lawn", "Charge the battery", "High");
 let defaultProjectTwo = projectFactory("Get stuff for Tacos", "Hamburger", "Medium");
 
-
-// defaultProjectOne.addTask("Get mower out of storage");
-// defaultProjectTwo.addTask("Shells");
-// defaultProjectTwo.addTask("Shredded Mexican Cheese");
-
 let allProjects = new Array();
 allProjects.push(defaultProjectOne);
 allProjects.push(defaultProjectTwo);
 
-// addTask(allProjects[0], "Get mower out of storage");
+addTask(allProjects[0], "Get mower out of storage", "Medium");
 addTask(allProjects[1], "Shells", "medium");
 addTask(allProjects[1], "Shredded Mexican Cheese");
 removeTask(allProjects[1], "Seasoning", "Low")

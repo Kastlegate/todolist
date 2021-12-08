@@ -184,8 +184,29 @@ function addTasksToCurrentProject(i){
     createNewTask.classList.add("taskContainer");
     createNewTask.addEventListener("click", createNewTaskClicked)
     projectContent.appendChild(createNewTask);
+
+    //divider between unfinished and finished tasks
+    let dividerContainer = document.createElement("div");
+    dividerContainer.id = "dividerContainer"
+    let dividerLeft = document.createElement("hr");
+    dividerLeft.id = "dividerLeft";
+    dividerLeft.classList.add("dividers")
+    let finishedTaskCount = document.createElement("div");
+    finishedTaskCount.textContent = "Finished Tasks: (" + array.finishedTasksArray.length + ")";
+    finishedTaskCount.id = "finishedTaskCount";
+    let dividerRight = document.createElement("hr");
+    dividerRight.id = "dividerRight";
+    dividerRight.classList.add("dividers")
+    dividerContainer.appendChild(dividerLeft);
+    dividerContainer.appendChild(finishedTaskCount);
+    dividerContainer.appendChild(dividerRight);
+    projectContent.appendChild(dividerContainer);
     
-    // for each running through the object's taskArray and adding each item to the projectContent's
+    
+
+
+    
+    // for each that runs through the object's taskArray and adding each item to the projectContent's
     // active tasks    
     array.tasksArray.forEach(element => {
         //container for priority, task, and due date
@@ -206,14 +227,30 @@ function addTasksToCurrentProject(i){
         let taskToAdd = document.createElement("div");
         taskToAdd.id = element.tasks;
         taskToAdd.classList.add("taskTextContainer")
-        taskToAdd.textContent = element.tasks + "   " + element.priority;
-
-        // taskToAdd.addEventListener("click", activeTaskInListClicked)
+        taskToAdd.textContent = element.tasks;      
         activeContainer.appendChild(taskToAdd);
+
+        //sets the priority of the task
+        let priorityText = document.createElement("div");
+        priorityText.id = "priorityText"
+        priorityText.textContent = "Priority:";
+        activeContainer.appendChild(priorityText);
+        let taskPriority = document.createElement("select")
+        let priorityOne = document.createElement("option");
+        priorityOne.textContent = "Low";
+        taskPriority.appendChild(priorityOne);
+        let priorityTwo = document.createElement("option");
+        priorityTwo.textContent = "Medium";
+        taskPriority.appendChild(priorityTwo)
+        let priorityThree = document.createElement("option");
+        priorityThree.textContent = "High";
+        taskPriority.appendChild(priorityThree)
+        activeContainer.appendChild(taskPriority);
+
 
     });
 
-    // similar for each running through the finishedTasks array and creating an object for each task
+    // similar for each that runs through the finishedTasks array and creating an object for each task
     // and adding it to the projectContent    
     array.finishedTasksArray.forEach(element => {
 
@@ -233,7 +270,7 @@ function addTasksToCurrentProject(i){
         
         //creates a div which holds the task that is added
         let checkMarkedtaskToAdd = document.createElement("div");
-        checkMarkedtaskToAdd.id = element;
+        checkMarkedtaskToAdd.id = element.tasks;
         checkMarkedtaskToAdd.classList.add("taskChecked")
         checkMarkedtaskToAdd.classList.add("taskTextContainer")
         checkMarkedtaskToAdd.textContent = element.tasks + "   " + element.priority;

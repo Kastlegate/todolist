@@ -178,9 +178,9 @@ body{
     width: 100%;
     display: flex;
     flex-direction: row;
-    box-sizing:border-box;
+    /* box-sizing:border-box; */
     position:fixed; /* reason page won't scroll down will need to be fixed */
-    animation: fadeIn 2s;
+    animation: fadeIn .5s;
 }
 
 #sideBar{
@@ -278,6 +278,36 @@ body{
     cursor: pointer;
     margin-left: 6px !important;
     text-align: left;
+}
+
+#dividerContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.dividers{
+    width: 30%;
+    height: 1px;
+    color: black;
+}
+
+#finishedTaskCount{
+    width: 160px;
+}
+
+#priorityText{
+    font-size: 80%;
+    height: fit-content;
+}
+
+select{
+    background-color: rgb(36, 80, 36, .0);
+    color: white;
+    border: none;
+    margin-left: 3px;
+    height: 80%;
+    margin-top: -3px;
 }
 
 .taskChecked{
