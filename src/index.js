@@ -109,6 +109,13 @@ let firstTask = document.createElement("input");
     firstTask.setAttribute("placeholder", "Enter the first Task in your To Do List")
     newProjectForm.appendChild(firstTask);
 
+// //Gets the projects Priority
+// let  = document.createElement("input");
+//     firstTask.id = "firstTask";
+//     firstTask.classList.add("formItem");
+//     firstTask.setAttribute("placeholder", "Enter the first Task in your To Do List")
+//     newProjectForm.appendChild(firstTask);
+
     // creates a button to add the project
     let addProjectButton = document.createElement("button");
     addProjectButton.id = "addProjectButton";    
@@ -195,8 +202,8 @@ if (storageAvailable('localStorage')) {
     console.log("Local storage is not available");
   }
 
-  localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
-//   localStorage.removeItem('projects', JSON.stringify(getAllProjectsArray()))
+//   localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
+  localStorage.removeItem('projects', JSON.stringify(getAllProjectsArray()))
   
 
 
