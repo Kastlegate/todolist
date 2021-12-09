@@ -165,6 +165,33 @@ function deleteTaskClicked() {
 
 }
 
+function menuSelection(){
+    let index = this.getAttribute("data-select-priority-id");
+    let array =  this.getAttribute("data-select-priority-array-id");
+    let select = this.getAttribute("id");
+
+    console.log(getIndividualProject(array).tasksArray[index].priority);
+
+    switch (select) {
+        case "priority-Low":
+            getIndividualProject(array).tasksArray[index].priority = 1;
+            console.log("1 pushed")
+            break;
+
+        case "priority-Medium":
+            getIndividualProject(array).tasksArray[index].priority = 2;
+            console.log("2 pushed")
+            break;
+
+        case "priority-High":
+            getIndividualProject(array).tasksArray[index].priority = 3;
+            console.log("3 pushed")
+            break;
+    }
+    addTasksToCurrentProject(array);
+    console.log(getIndividualProject(array).tasksArray[index].priority);
+}
+
 
 //adds each task to the projectContent depending on which To Do is inserted as an argument
 function addTasksToCurrentProject(i){
@@ -233,19 +260,43 @@ function addTasksToCurrentProject(i){
         //sets the priority of the task
         let priorityText = document.createElement("div");
         priorityText.id = "priorityText"
-        priorityText.textContent = "Priority:";
+        priorityText.textContent = "Priority: ";
         activeContainer.appendChild(priorityText);
         let taskPriority = document.createElement("select")
-        let priorityOne = document.createElement("option");
-        priorityOne.textContent = "Low";
-        taskPriority.appendChild(priorityOne);
-        let priorityTwo = document.createElement("option");
-        priorityTwo.textContent = "Medium";
-        taskPriority.appendChild(priorityTwo)
-        let priorityThree = document.createElement("option");
-        priorityThree.textContent = "High";
-        taskPriority.appendChild(priorityThree)
+        let priorityLow = document.createElement("option");
+        priorityLow.textContent = "Low";
+        priorityLow.id = "priority-Low"
+        priorityLow.dataset.selectPriorityId = array.tasksArray.indexOf(element);
+        priorityLow.dataset.selectPriorityArrayId = index;
+        priorityLow.addEventListener("click", menuSelection)
+        taskPriority.appendChild(priorityLow);
+        let priorityMedium = document.createElement("option");
+        priorityMedium.textContent = "Medium";
+        priorityMedium.id = "priority-Medium";
+        priorityMedium.dataset.selectPriorityId = array.tasksArray.indexOf(element);
+        priorityMedium.dataset.selectPriorityArrayId = index;
+        priorityMedium.addEventListener("click", menuSelection)
+        taskPriority.appendChild(priorityMedium)
+        let priorityHigh = document.createElement("option");
+        priorityHigh.textContent = "High";
+        priorityHigh.id = "priority-High";
+        priorityHigh.dataset.selectPriorityId = array.tasksArray.indexOf(element);
+        priorityHigh.dataset.selectPriorityArrayId = index;
+        priorityHigh.addEventListener("click", menuSelection)
+        taskPriority.appendChild(priorityHigh)
         activeContainer.appendChild(taskPriority);
+
+        if (element.priority == 1){
+            priorityLow.selected = true;
+        }
+
+        else if (element.priority == 2){
+            priorityMedium.selected = true;
+        }
+
+        else if (element.priority == 3){
+            priorityHigh.selected = true;
+        }
 
 
     });
@@ -273,7 +324,7 @@ function addTasksToCurrentProject(i){
         checkMarkedtaskToAdd.id = element.tasks;
         checkMarkedtaskToAdd.classList.add("taskChecked")
         checkMarkedtaskToAdd.classList.add("taskTextContainer")
-        checkMarkedtaskToAdd.textContent = element.tasks + "   " + element.priority;
+        checkMarkedtaskToAdd.textContent = element.tasks;
         // checkMarkedtaskToAdd.addEventListener("click", inactiveTaskInListClicked)
         inactiveContainer.appendChild(checkMarkedtaskToAdd);
 
