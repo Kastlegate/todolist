@@ -1,6 +1,9 @@
 import { getAllProjectsArray, getIndividualProject, addProject, addTask, removeTask } from "./toDoFunctions";
 
-
+// saves the current to do lists
+function saveLists(){
+    localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
+}
 
 // unhides the New Project project form
 function newProjectFormActivate(){
@@ -22,7 +25,7 @@ function newProjectFormDeactivate(){
 function newTaskFormActivate(){
     let form = document.getElementById("newTaskForm");
     form.className = "";    
-    newTaskForm.classList.add("newForm")
+    newTaskForm.classList.add("newTaskForm")
 }
 
 // hides the New Task form 
@@ -63,6 +66,7 @@ function addProjectsToSideBar(thisArray){
         projectToBeAddedToList.addEventListener("click", sideBarProjectClicked)
         projectsList.appendChild(projectToBeAddedToList);        
     });
+    
 }
 
 // funtion to add the current form as a new To Do List project
@@ -77,7 +81,7 @@ function addProjectButtonClicked(){
     // Displays the newly created project's initial task
     let index = getAllProjectsArray().length - 1;
     addTasksToCurrentProject(index);
-    localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
+    saveLists();
 
 }
 
@@ -107,7 +111,7 @@ function createNewTaskClicked(){
     // creates a button to add the project
     let addnewTaskButton = document.getElementById("addnewTaskButton")
     addnewTaskButton.dataset.addTaskId = index; 
-    localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
+    saveLists();
 
 }
 
@@ -164,7 +168,7 @@ function deleteTaskClicked() {
         addTasksToCurrentProject(array);
 
 }
-
+//function that sets the task's priority
 function menuSelection(){
     let index = this.getAttribute("data-select-priority-id");
     let array =  this.getAttribute("data-select-priority-array-id");
@@ -244,7 +248,9 @@ function addTasksToCurrentProject(i){
 
         //creates an un-checkmarked box
         let notCheckedMarkedBox = document.createElement("div");
+        
         notCheckedMarkedBox.className = "far fa-square";
+        notCheckedMarkedBox.classList.add("cursor")
         notCheckedMarkedBox.addEventListener("click", activeTaskInListClicked)
         notCheckedMarkedBox.dataset.taskId = array.tasksArray.indexOf(element);
         notCheckedMarkedBox.dataset.arrayId = index;
@@ -264,27 +270,27 @@ function addTasksToCurrentProject(i){
         activeContainer.appendChild(priorityText);
         let taskPriority = document.createElement("select")
         let priorityLow = document.createElement("option");
-        priorityLow.textContent = "Low";
-        priorityLow.id = "priority-Low"
-        priorityLow.dataset.selectPriorityId = array.tasksArray.indexOf(element);
-        priorityLow.dataset.selectPriorityArrayId = index;
-        priorityLow.addEventListener("click", menuSelection)
-        taskPriority.appendChild(priorityLow);
+            priorityLow.textContent = "Low";
+            priorityLow.id = "priority-Low"
+            priorityLow.dataset.selectPriorityId = array.tasksArray.indexOf(element);
+            priorityLow.dataset.selectPriorityArrayId = index;
+            priorityLow.addEventListener("click", menuSelection)
+            taskPriority.appendChild(priorityLow);
         let priorityMedium = document.createElement("option");
-        priorityMedium.textContent = "Medium";
-        priorityMedium.id = "priority-Medium";
-        priorityMedium.dataset.selectPriorityId = array.tasksArray.indexOf(element);
-        priorityMedium.dataset.selectPriorityArrayId = index;
-        priorityMedium.addEventListener("click", menuSelection)
-        taskPriority.appendChild(priorityMedium)
+            priorityMedium.textContent = "Medium";
+            priorityMedium.id = "priority-Medium";
+            priorityMedium.dataset.selectPriorityId = array.tasksArray.indexOf(element);
+            priorityMedium.dataset.selectPriorityArrayId = index;
+            priorityMedium.addEventListener("click", menuSelection)
+            taskPriority.appendChild(priorityMedium)
         let priorityHigh = document.createElement("option");
-        priorityHigh.textContent = "High";
-        priorityHigh.id = "priority-High";
-        priorityHigh.dataset.selectPriorityId = array.tasksArray.indexOf(element);
-        priorityHigh.dataset.selectPriorityArrayId = index;
-        priorityHigh.addEventListener("click", menuSelection)
-        taskPriority.appendChild(priorityHigh)
-        activeContainer.appendChild(taskPriority);
+            priorityHigh.textContent = "High";
+            priorityHigh.id = "priority-High";
+            priorityHigh.dataset.selectPriorityId = array.tasksArray.indexOf(element);
+            priorityHigh.dataset.selectPriorityArrayId = index;
+            priorityHigh.addEventListener("click", menuSelection)
+            taskPriority.appendChild(priorityHigh)
+            activeContainer.appendChild(taskPriority);
 
         if (element.priority == 1){
             priorityLow.selected = true;
@@ -297,6 +303,18 @@ function addTasksToCurrentProject(i){
         else if (element.priority == 3){
             priorityHigh.selected = true;
         }
+
+        
+
+        // creating Due Dates
+        let date = document.createElement("input");
+        date.id = "Task " + array.tasksArray.indexOf(element) + ": DueDate";
+        date.classList.add("date");
+        date.type = "date";
+        // date.value = new Date()
+        activeContainer.appendChild(date);
+
+        let dueDate = new Date()
 
 
     });
@@ -314,6 +332,7 @@ function addTasksToCurrentProject(i){
         //creates a checkmarked box
         let checkedMarkedBox = document.createElement("div");
         checkedMarkedBox.className = "far fa-check-square";
+        checkedMarkedBox.classList.add("cursor")
         checkedMarkedBox.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
         checkedMarkedBox.dataset.finsihedArrayId = index;
         checkedMarkedBox.addEventListener("click", inactiveTaskInListClicked)
@@ -331,12 +350,14 @@ function addTasksToCurrentProject(i){
         //creates a delete button to remove a task permanently
         let deleteTask = document.createElement("div")
         deleteTask.className = "fas fa-trash-alt";
+        deleteTask.classList.add("cursor");
+        deleteTask.classList.add("deleteTask");
         deleteTask.dataset.deleteTaskId = array.finishedTasksArray.indexOf(element);
         deleteTask.dataset.deleteFinsihedArrayId = index;
         deleteTask.addEventListener("click", deleteTaskClicked)
         inactiveContainer.appendChild(deleteTask);    
     });
-    localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
+    saveLists();
 
 }
 

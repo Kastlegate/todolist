@@ -136,7 +136,7 @@ let newTaskForm = document.createElement("form");
     newTaskForm.classList.add("hideForm");
     newTaskForm.setAttribute("onsubmit", "return false")
     // newProjectForm.classList.add("hideNewProjectForm");
-    projectDisplay.insertBefore(newTaskForm, currentProjectTitle);
+    projectDisplay.insertBefore(newTaskForm, projectContent);
 
     //Gets the new task
     let newTask = document.createElement("input");
@@ -151,11 +151,11 @@ let newTaskForm = document.createElement("form");
     addnewTaskButton.textContent = "+ Add To Do list";    
     newTaskForm.appendChild(addnewTaskButton);
     
-    
+//checks to see if locale storage has been used, and loads the previous saved data if so.
 
 if (localStorage.getItem('projects'))
 {
-    console.log("is present")
+    console.log("storage is present")
     let projectsArray = JSON.parse(window.localStorage.getItem('projects'));
     console.log(projectsArray)
     setallProjects(projectsArray)
@@ -163,7 +163,7 @@ if (localStorage.getItem('projects'))
 }
 
 else{
-    console.log("is not present")
+    console.log("storage is not present")
     addProjectsToSideBar(getAllProjectsArray());
 }
 
@@ -202,8 +202,8 @@ if (storageAvailable('localStorage')) {
     console.log("Local storage is not available");
   }
 
-//   localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
-  localStorage.removeItem('projects', JSON.stringify(getAllProjectsArray()))
+  localStorage.setItem('projects', JSON.stringify(getAllProjectsArray()))
+//   localStorage.removeItem('projects', JSON.stringify(getAllProjectsArray()))
   
 
 

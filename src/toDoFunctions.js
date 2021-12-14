@@ -1,18 +1,19 @@
 // import {  } from "./toDoListDom";
 
-//factory that is used to create new function projects
-function projectFactory (title, tasks, priority)
+//factory that is used to create new projects
+function projectFactory (title, tasks, priority, dueDate)
 {
     title = title;
-    //another factory that hold a task object, it's priority and it's due date 
+    //another factory that will hold a task object, it's priority and it's due date 
     function fullTask (task){
         tasks = task;
         priority = priority;
+        dueDate = dueDate;
 
-        return{tasks, priority}
+        return{tasks, priority, dueDate}
     }
-
-    let tasky = fullTask(tasks, priority)
+    // creates a task with the fullTask function
+    let tasky = fullTask(tasks, priority, dueDate )
 
     //an Array that holds each To do list's tasks
     let tasksArray = new Array();
@@ -20,34 +21,33 @@ function projectFactory (title, tasks, priority)
     // an array that holds all finsished and checked tasks
     let finishedTasksArray = new Array();
 
-    // priority = priority;
-    // dueDate = dueDate;
-
     return { title, tasksArray, finishedTasksArray, }
 }
 
 //  adds a task to the tasksArray
-function addTask(array, tasks, priority){
+function addTask(array, tasks, priority, dueDate){
 
-    function fullTask (task, priority){
+    function fullTask (task, priority, dueDate){
         tasks = task;
         priority = priority;
+        dueDate = dueDate;
 
-        return{tasks, priority}
+        return{tasks, priority, dueDate}
     }
-
-    let tasky = fullTask(tasks, priority)
+    //
+    let tasky = fullTask(tasks, priority, dueDate)
 
     array.tasksArray.push(tasky);
 }
 
 //adds a task to the completed task array
-function removeTask(array, tasks, priority){
-    function fullTask (task, priority){
+function removeTask(array, tasks, priority, dueDate){
+    function fullTask (task, priority, dueDate){
         tasks = task;
         priority = priority;
+        dueDate = dueDate;
 
-        return{tasks, priority}
+        return{tasks, priority, dueDate}
     }
 
     let tasky = fullTask(tasks, priority)
@@ -62,8 +62,8 @@ let allProjects = new Array();
 allProjects.push(defaultProjectOne);
 allProjects.push(defaultProjectTwo);
 
-addTask(allProjects[0], "Get mower out of storage", "Medium");
-addTask(allProjects[1], "Shells", "medium");
+addTask(allProjects[0], "Get mower out of storage", 2);
+addTask(allProjects[1], "Shells", 2);
 addTask(allProjects[1], "Shredded Mexican Cheese", 2);
 removeTask(allProjects[1], "Seasoning", 1)
 
