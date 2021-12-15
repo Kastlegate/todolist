@@ -31,10 +31,9 @@ function newTaskFormActivate(){
 // hides the New Task form 
 function newTaskFormDeactivate(){
     let form = document.getElementById("newTaskForm");
-    console.log(form)
     form.className = "";    
-    form.classList.add("hideForm")
-    document.getElementById("firstTask").value = "";   
+    form.classList.add("hideForm"); 
+    document.getElementById("newTask").value = ""; 
 }
 
 //function to be called when a project from the list in the sidebar is clicked
@@ -125,7 +124,7 @@ function activeTaskInListClicked(){
     console.log("task array? " + getIndividualProject(array).tasksArray[index])
     console.log("just array " + getIndividualProject(array))
     console.log(checkMarkedTask)
-    removeTask(getIndividualProject(array), checkMarkedTask.tasks, checkMarkedTask.priority);
+    removeTask(getIndividualProject(array), checkMarkedTask.tasks, checkMarkedTask.priority, checkMarkedTask.dueDate);
     console.log("task added to finishedTasksArray: " + getIndividualProject(array).finishedTasksArray);
 
     // removes the task from the array and populates the tasks on screen
@@ -142,7 +141,7 @@ function inactiveTaskInListClicked(){
     // uses the data-task-id to get the current task inside the array
     let index = this.getAttribute("data-checkmarked-task-id")
     let checkMarkedTask = getIndividualProject(array).finishedTasksArray[index];
-    addTask(getIndividualProject(array), checkMarkedTask.tasks, checkMarkedTask.priority);
+    addTask(getIndividualProject(array), checkMarkedTask.tasks, checkMarkedTask.priority, checkMarkedTask.dueDate);
     // getIndividualProject(array).addTask(checkMarkedTask);
     console.log("task added to TasksArray: " + getIndividualProject(array).finishedTasksArray);
 
@@ -196,6 +195,17 @@ function menuSelection(){
     console.log(getIndividualProject(array).tasksArray[index].priority);
 }
 
+function dateSelected(){
+    let index = this.getAttribute("data-due-date-id");
+    let array =  this.getAttribute("data-due-date-array");
+    let date = document.getElementById("Task " + index + ": DueDate")
+    getIndividualProject(array).tasksArray[index].dueDate = date.value;
+    console.log("due date? " + getIndividualProject(array).tasksArray[index].dueDate)
+    console.log("array " + getIndividualProject(array).tasksArray.title)
+    // console.log("index " + getIndividualProject(array).tasksArray[index])
+    saveLists();
+}
+
 
 //adds each task to the projectContent depending on which To Do is inserted as an argument
 function addTasksToCurrentProject(i){
@@ -206,8 +216,8 @@ function addTasksToCurrentProject(i){
     let projectContent = document.getElementById("projectContent");
     //erases tasks that are displayed in the project content
     projectContent.textContent = "";
-
-    // createNewTaskInProject();
+    
+    // creates the new task button
     let createNewTask = document.createElement("div");
     createNewTask.id = "createNewTask";
     createNewTask.dataset.createNewTaskid = index;
@@ -232,11 +242,7 @@ function addTasksToCurrentProject(i){
     dividerContainer.appendChild(finishedTaskCount);
     dividerContainer.appendChild(dividerRight);
     projectContent.appendChild(dividerContainer);
-    
-    
 
-
-    
     // for each that runs through the object's taskArray and adding each item to the projectContent's
     // active tasks    
     array.tasksArray.forEach(element => {
@@ -305,16 +311,21 @@ function addTasksToCurrentProject(i){
         }
 
         
-
         // creating Due Dates
         let date = document.createElement("input");
         date.id = "Task " + array.tasksArray.indexOf(element) + ": DueDate";
         date.classList.add("date");
         date.type = "date";
-        // date.value = new Date()
+        date.dataset.dueDateId = array.tasksArray.indexOf(element);
+        date.dataset.dueDateArray = index;
+        date.addEventListener("change", dateSelected)
+        date.value = element.dueDate;
         activeContainer.appendChild(date);
 
-        let dueDate = new Date()
+        // element.dueDate = date.value;
+         console.log("due date? " + element.dueDate)
+
+        // let dueDate = new Date()
 
 
     });
@@ -325,37 +336,37 @@ function addTasksToCurrentProject(i){
 
         // container for each completed and check marked task
         let inactiveContainer = document.createElement("div");
-        inactiveContainer.id = element + "-inactiveContainer"
-        inactiveContainer.classList.add("taskContainer")
-        projectContent.appendChild(inactiveContainer);
+            inactiveContainer.id = element + "-inactiveContainer"
+            inactiveContainer.classList.add("taskContainer")
+            projectContent.appendChild(inactiveContainer);
 
         //creates a checkmarked box
         let checkedMarkedBox = document.createElement("div");
-        checkedMarkedBox.className = "far fa-check-square";
-        checkedMarkedBox.classList.add("cursor")
-        checkedMarkedBox.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
-        checkedMarkedBox.dataset.finsihedArrayId = index;
-        checkedMarkedBox.addEventListener("click", inactiveTaskInListClicked)
-        inactiveContainer.appendChild(checkedMarkedBox);
+            checkedMarkedBox.className = "far fa-check-square";
+            checkedMarkedBox.classList.add("cursor")
+            checkedMarkedBox.dataset.checkmarkedTaskId = array.finishedTasksArray.indexOf(element);
+            checkedMarkedBox.dataset.finsihedArrayId = index;
+            checkedMarkedBox.addEventListener("click", inactiveTaskInListClicked)
+            inactiveContainer.appendChild(checkedMarkedBox);
         
         //creates a div which holds the task that is added
         let checkMarkedtaskToAdd = document.createElement("div");
-        checkMarkedtaskToAdd.id = element.tasks;
-        checkMarkedtaskToAdd.classList.add("taskChecked")
-        checkMarkedtaskToAdd.classList.add("taskTextContainer")
-        checkMarkedtaskToAdd.textContent = element.tasks;
-        // checkMarkedtaskToAdd.addEventListener("click", inactiveTaskInListClicked)
-        inactiveContainer.appendChild(checkMarkedtaskToAdd);
+            checkMarkedtaskToAdd.id = element.tasks;
+            checkMarkedtaskToAdd.classList.add("taskChecked")
+            checkMarkedtaskToAdd.classList.add("taskTextContainer")
+            checkMarkedtaskToAdd.textContent = element.tasks;
+            // checkMarkedtaskToAdd.addEventListener("click", inactiveTaskInListClicked)
+            inactiveContainer.appendChild(checkMarkedtaskToAdd);
 
         //creates a delete button to remove a task permanently
         let deleteTask = document.createElement("div")
-        deleteTask.className = "fas fa-trash-alt";
-        deleteTask.classList.add("cursor");
-        deleteTask.classList.add("deleteTask");
-        deleteTask.dataset.deleteTaskId = array.finishedTasksArray.indexOf(element);
-        deleteTask.dataset.deleteFinsihedArrayId = index;
-        deleteTask.addEventListener("click", deleteTaskClicked)
-        inactiveContainer.appendChild(deleteTask);    
+            deleteTask.className = "fas fa-trash-alt";
+            deleteTask.classList.add("cursor");
+            deleteTask.classList.add("deleteTask");
+            deleteTask.dataset.deleteTaskId = array.finishedTasksArray.indexOf(element);
+            deleteTask.dataset.deleteFinsihedArrayId = index;
+            deleteTask.addEventListener("click", deleteTaskClicked)
+            inactiveContainer.appendChild(deleteTask);    
     });
     saveLists();
 

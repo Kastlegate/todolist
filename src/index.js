@@ -145,14 +145,21 @@ let newTaskForm = document.createElement("form");
     newTask.setAttribute("placeholder", "New Task")
     newTaskForm.appendChild(newTask);
 
+    // button to add the new task
     let addnewTaskButton = document.createElement("button");
     addnewTaskButton.id = "addnewTaskButton";
     addnewTaskButton.addEventListener("click", addNewTaskButtonClicked)
-    addnewTaskButton.textContent = "+ Add To Do list";    
+    addnewTaskButton.textContent = "+ Add To List";    
     newTaskForm.appendChild(addnewTaskButton);
+
+    // button that cancels adding a new task
+    let cancelNewTaskButton = document.createElement("button");
+    cancelNewTaskButton.id = "cancelNewTaskButton";
+    cancelNewTaskButton.addEventListener("click", newTaskFormDeactivate)
+    cancelNewTaskButton.textContent = "Cancel";    
+    newTaskForm.appendChild(cancelNewTaskButton);
     
 //checks to see if locale storage has been used, and loads the previous saved data if so.
-
 if (localStorage.getItem('projects'))
 {
     console.log("storage is present")
@@ -169,7 +176,7 @@ else{
 
 
 
-    // checks to see if local storage is available
+// checks to see if local storage is available
 function storageAvailable(type) {
     var storage;
     try {

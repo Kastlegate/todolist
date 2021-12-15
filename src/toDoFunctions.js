@@ -50,7 +50,7 @@ function removeTask(array, tasks, priority, dueDate){
         return{tasks, priority, dueDate}
     }
 
-    let tasky = fullTask(tasks, priority)
+    let tasky = fullTask(tasks, priority, dueDate)
 
     array.finishedTasksArray.push(tasky);
 }
